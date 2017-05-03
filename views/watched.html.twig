@@ -1,0 +1,35 @@
+{# watched.html.twig
+
+	CSC436
+	Krystal Chen
+
+	This file provides the template for displaying details for the episodes that
+	the customer has viewed in the database. It sets up the table style and then
+	builds the html code for the table of information about the watched episodes.
+
+#}
+
+{% include 'header.twig' %}
+<style>
+table, tr, th, td {border: 1px solid black !important;}
+td, th {padding: .4em}
+.id { text-align: center; }
+.bold { font-weight: bold; }
+</style>
+<h1>Episode of {{ custInfo[0].title }} watched by {{ custInfo[0].fname }} {{custInfo[0].lname }}</h1>
+
+{% if watchedList %}
+	<table>
+	<tr> 
+	<th class="bold">Title</th>
+	<th class="bold">Date Watched</th>
+	</tr>	
+	{% for show in watchedList%}
+		<tr>
+		<td><a href="/streamTV/episodeinfo/{{ show.showID }}&{{ show.episodeID }}">{{ show.title }}</a></td>
+		<td>{{ show.datewatched }}</td>
+		</tr>
+	{% endfor %}
+	</table>
+{% endif %} 
+{% include 'footer.twig' %}

@@ -1,0 +1,52 @@
+{# actorinfo.html.twig
+
+	CSC436
+	Krystal Chen
+	
+	This file provides the template for displaying details for a specific
+	actor in the database.  It sets up the table style and then builds the
+	html code for the table of information about the show.
+
+#}
+
+{% include 'header.twig' %}
+<style>
+table, tr, th, td {border: 1px solid black !important;}
+td, th {padding: .4em}
+.bold { font-weight: bold; }
+</style>
+
+{% if mainResults %}
+	<h1>Details for {{ mainResults[0].fname }} {{ mainResults[0].lname }}</h1>
+	<h2>Main Cast Roles For {{ mainResults[0].fname }} {{ mainResults[0].lname }}:</h2>
+	<table>
+	<tr>
+	<th class="bold">Show</th>
+	<th class="bold">Role</th>	
+	</tr>
+	{% for actor in mainResults %}
+		<tr>
+		<td><a href="/streamTV/showinfo/{{ actor.showID }}">{{ actor.title }}</a></td>
+		<td>{{ actor.role }}</td>
+		</tr>
+	{% endfor %}
+	</table>
+{% endif %}
+
+{% if guestResults %}
+	<h2>Guest Cast Roles For {{ guestResults[0].fname }} {{ guestResults[0].lname }}:</h2>
+	<table>
+	<tr>
+	<th class="bold">Show</th>
+	<th class="bold">Role</th>
+	</tr>
+	{% for actor in guestResults %}
+		<tr>
+		<td><a href="/streamTV/showinfo/{{ actor.showID }}">{{ actor.title }}</a></td>
+		<td>{{ actor.role }}</td> 
+		</tr>
+	{% endfor %}
+	</table>
+{% endif %}
+
+{% include 'footer.twig' %}

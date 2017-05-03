@@ -1,0 +1,37 @@
+{# show_episodes.html.twig
+
+	CSC436
+	Krystal Chen
+
+	This file provides the template for displaying details for the episode list
+	in a TV series in the database.  It sets up the table style and then builds the
+	html code for the table of information about the shows episodes.
+
+#}
+
+{% include 'header.twig' %}
+<style>
+table, tr, th, td {border: 1px solid black !important;}
+td, th {padding: .4em}
+.id { text-align: center; }
+.bold { font-weight: bold; }
+</style>
+{% if episodeResults %}
+	<h1>Episodes of <a href="/streamTV/showinfo/{{ episodeResults[0].sID }} ">{{ episodeResults[0].sTitle }}</a></h1> 
+	<table>
+	<tr>
+	<th class="bold">Season</th>
+	<th class="bold">Title</th>
+	<th class="bold">Air Date</th>
+	</tr>
+	{% for episode in episodeResults %}
+		<tr>
+		<td>{{ episode.season }}</td>
+		<td><a href="/streamTV/episodeinfo/{{episode.sID}}&{{episode.eID}} ">{{ episode.eTitle }}</a></td>
+		<td>{{ episode.airdate }}</td>
+		</tr>
+	{% endfor %}
+	
+{% endif %}
+
+{% include 'footer.twig' %}

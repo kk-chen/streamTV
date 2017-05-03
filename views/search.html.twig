@@ -1,0 +1,53 @@
+{# search.html.twig
+
+	CSC436
+	Krystal Chen
+
+	This file provies the template to allow a user to search for the name of a show or actor.
+	It uses the form templage and then displays results of the search on the same page.
+	The results are displayed as a table with the shows or actors name.  The show or actors 
+	name has an embedded link to the page for that specific show or actor.
+#}
+
+{% include 'header.twig' %}
+<style>
+	table, tr, th, td { border: 1px solid black !important; }
+	td, th {padding: .4em;}
+		.id { text-align: center; }
+		.name { text-align: center; }
+		.price { text-align: right; }
+</style>
+
+<h1>Search</h1>
+
+{{form_start(form)}}
+{{form_widget(form)}}
+{{form_end(form)}}
+
+{% if showResults %}
+	<table>
+		<tr>
+		<th class="showID">Show Title</th>
+		</tr>
+	{% for shows in showResults %}
+		<tr>
+		<td class="showID"><a href="/streamTV/showinfo/{{ shows.showID }}">{{ shows.title }}</a></td>
+		</tr>
+	{% endfor %}
+	</table>
+{% endif %}
+<br>
+<br>
+{% if actorResults %}
+	<table>
+		<tr>
+		<th class="actID">Actors</th>
+		</tr>
+	{% for actors in actorResults %}
+		<tr>
+		<td class="actID"><a href="/streamTV/actorinfo/{{ actors.actID }}">{{ actors.fname }} {{ actors.lname}}</a></td>
+		</tr>
+	{% endfor %}
+	</table>
+{% endif %}
+{% include 'footer.twig' %}

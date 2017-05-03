@@ -1,0 +1,28 @@
+{# watchepisode.html.twig
+
+	CSC436
+	Krystal Chen
+
+	This file provides the template for the customer watching an episode of a 
+	show in their queue.  It sets up the table style and then builds the html code
+	for the information about the episode that is being watched.
+
+#}
+
+{% include 'header.twig' %}
+<style>
+table, tr, th, td {border: 1px solid black !important;}
+td, th {padding: .4em}
+.id { text-align: center; }
+.bold { font-weight: bold; }
+</style>
+
+{% if canWatch %}
+	<h1>Enjoy watching Episode: <i>{{ episodeInfo[0].eTitle }}</i> of <b>{{ episodeInfo[0].sTitle }}</b></h1>
+{% else %}
+	<h1>Sorry, you cannot watch Episode: <i>{{ episodeInfo[0].eTitle }}</i> of <b>{{ episodeInfo[0].sTitle }}</b>
+	<br>
+	<br>
+	Your account has already watched this episode today.</h1>
+{% endif %}
+{% include 'footer.twig' %}

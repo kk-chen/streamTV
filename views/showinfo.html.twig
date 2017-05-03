@@ -1,0 +1,77 @@
+{# showinfo.html.twig
+
+	CSC436
+	Krystal Chen
+
+	This file provides the template for displaying details for a specific
+	show in the database.  It sets up the table style and then builds the
+	html code for the table of information about the show.
+
+#}
+
+{% include 'header.twig' %}
+<style>
+table, tr, th, td {border: 1px solid black !important;}
+td, th {padding: .4em}
+.id { text-align: center; }
+.bold { font-weight: bold; }
+</style>
+{% if showResults %}
+	<h1>{{showResults[0].title}}</h1>
+	<h2>View <a href="/streamTV/show_episodes/{{ showResults[0].showID }} ">All Episodes</a></h2>
+
+	<table>
+	<tr>
+	<th class="bold">Premiere Year</td>
+	<td class="value">{{showResults[0].premiere_year}}</td>
+	</tr><tr>
+	<th class="bold">Network</td>
+	<td class="value">{{showResults[0].network}}</td>
+	</tr><tr>
+	<th class="bold">Creator</td>
+	<td class="value">{{showResults[0].creator}}</td>
+	</tr><tr>
+	<th class="bold">Category</td>
+	<td class="value">{{showResults[0].category}}</td>
+	</tr>
+	</table>
+{% endif %}
+
+{% if addQueue %}
+	<h2><a href="/streamTV/ ">Add to Queue</a></h2>
+{% endif %}
+
+{% if mainResults %}
+	<h2>Actors in Main Cast:</h2>
+	<table>
+	<tr>
+	<th class="bold">Actor</th>
+	<th class="bold">Role</th>
+	</tr>
+	{% for actor in mainResults %}
+		<tr>
+		<td><a href="/streamTV/actorinfo/{{ actor.actID }} ">{{ actor.fname }} {{ actor.lname }}</a></td>
+		<td>{{ actor.role }}</td>
+		</tr>	
+	{% endfor %}
+	</table>
+{% endif %}
+
+{% if guestResults %}
+	<h2>Actors in the Guest Cast:</h2>
+	<table>
+	<tr>
+	<th class="bold">Actor</th>
+	<th class="bold">Role</th>
+	<th class="bold">Number of Appearances</th>
+	</tr>
+	{% for actor in guestResults %}
+		<tr>
+		<td><a href="/streamTV/actorinfo/{{ actor.actID }} ">{{ actor.fname }} {{ actor.lname }}</a></td>
+		<td>{{ actor.role }}</td>
+		<td>{{ actor.appearances }}</td>
+		</tr>
+	{% endfor %}
+	</table>
+{% endif %}
+{% include 'footer.twig' %}

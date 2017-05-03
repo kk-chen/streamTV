@@ -1,0 +1,40 @@
+{# queue.html.twig
+
+	CSC436
+	Krystal Chen
+
+	This file provides the template for displaying details for a specific 
+	customer queue in the database.  It sets up the table style and then 
+	builds the html code for the table of information about the customers queue.
+	
+#}
+
+{% include 'header.twig' %}
+<style>
+table, tr, th, td {border: 1px solid black !important;}
+td, th {padding: .4em}
+.id { text-align: center; }
+.bold { font-weight: bold; }
+</style>
+
+{% if currentQueue %}
+	<h1>Queued Shows For {{ currentQueue[0].fname }} {{ currentQueue[0].lname }}</h1>
+	<h2>{{ currentQueue[0].email }}</h2> 
+	<table>
+	<tr> 
+	<th class="bold">Title</th>
+	<th class="bold">Date Queued</th>
+	<th class="bold">Watched Episodes</th>
+	</tr>
+	{% for show in currentQueue %}
+		<tr>
+		<td><a href="/streamTV/showinfo/{{ show.showID }}">{{ show.title }}</a></td>
+		<td>{{ show.datequeued }}</td>
+		<td><a href="/streamTV/watched/{{ show.showID }}">List</a></td>
+		</tr>
+	{% endfor %}
+	</table>
+
+{% endif %}
+
+{% include 'footer.twig' %}
